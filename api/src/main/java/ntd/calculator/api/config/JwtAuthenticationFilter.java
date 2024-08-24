@@ -18,7 +18,7 @@ import java.io.IOException;
 
 @Configuration
 @RequiredArgsConstructor
-public class AuthenticationFilter extends OncePerRequestFilter {
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
@@ -41,7 +41,8 @@ public class AuthenticationFilter extends OncePerRequestFilter {
 
         jwt = authHeader.substring(7);
         username = jwtService.extractUsername(jwt);
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {// user not authenticated
+        // user not authenticated
+        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             var user = this.userDetailsService.loadUserByUsername(username);
             if (jwtService.isTokenValid(jwt, user)) {
                 // it needs to update our security context
