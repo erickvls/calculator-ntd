@@ -27,7 +27,7 @@ public class User implements UserDetails {
     @Column(unique = true, nullable = false)
     private String username;
     private String password;
-    private boolean status;
+    private boolean status = true;
     @Enumerated(EnumType.STRING)
     private Role role;
 
