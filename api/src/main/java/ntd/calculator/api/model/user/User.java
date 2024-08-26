@@ -28,12 +28,11 @@ public class User implements UserDetails {
     private String username;
     private String password;
     private boolean status;
-    @Enumerated(EnumType.STRING)
-    private Role role;
 
+    // by the requirements, there isn't a need for having multiple Roles.
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority((role.name())));
+        return List.of();
     }
 
     @Override

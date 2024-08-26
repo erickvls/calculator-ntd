@@ -1,5 +1,6 @@
 package ntd.calculator.api.controller.auth;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import ntd.calculator.api.dto.auth.AuthenticationRequest;
 import ntd.calculator.api.dto.auth.AuthenticationResponse;
@@ -18,13 +19,13 @@ public class AuthenticationController {
     private final AuthenticationService service;
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(
-            @RequestBody AuthenticationRequest request){
+           @Valid @RequestBody AuthenticationRequest request){
         return ResponseEntity.ok(service.register(request));
     }
 
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(
-            @RequestBody AuthenticationRequest request){
+            @Valid @RequestBody AuthenticationRequest request){
         return ResponseEntity.ok(service.authenticate(request));
     }
 }
