@@ -4,12 +4,27 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class ErrorResponse {
-    private Map<String, String> errors = new HashMap<>();
+
+    private ErrorDetails errors;
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class ErrorDetails {
+        private String type;
+        private List<FieldError> field;
+
+        @Data
+        @AllArgsConstructor
+        public static class FieldError {
+            private String name;
+            private String message;
+        }
+    }
 }
