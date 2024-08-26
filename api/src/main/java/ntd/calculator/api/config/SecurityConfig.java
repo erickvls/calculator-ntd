@@ -22,14 +22,17 @@ public class SecurityConfig {
     @Value("${api.version}")
     private String apiVersion;
 
+    @Value("${api.path}")
+    private String apiPath;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req ->
-                        req.requestMatchers("/api/v1/auth/**")
+                        req.requestMatchers("/" + apiPath + "/" + apiVersion + "/auth/**")
                                 .permitAll()
-                                .requestMatchers("/api/" + apiVersion + "/**")
+                                .requestMatchers("/" + apiPath + "/" + apiVersion + "/**")
                                 .authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
