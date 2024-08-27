@@ -1,4 +1,4 @@
-package ntd.calculator.api.dto.response;
+package ntd.calculator.api.models.responses;
 
 import lombok.Data;
 

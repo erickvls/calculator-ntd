@@ -1,12 +1,11 @@
-package ntd.calculator.api.service.auth;
+package ntd.calculator.api.services.auth;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import ntd.calculator.api.Role;
-import ntd.calculator.api.dto.auth.AuthenticationRequest;
-import ntd.calculator.api.dto.auth.AuthenticationResponse;
-import ntd.calculator.api.model.user.User;
-import ntd.calculator.api.repository.UserRepository;
+import ntd.calculator.api.enums.TokenType;
+import ntd.calculator.api.models.requests.auth.AuthenticationRequest;
+import ntd.calculator.api.models.requests.auth.AuthenticationResponse;
+import ntd.calculator.api.models.user.User;
+import ntd.calculator.api.repositories.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -45,6 +44,7 @@ public class AuthenticationService {
     private AuthenticationResponse createAuthenticationResponse(UserDetails user){
         var jwtToken = jwtService.createToken(user);
         return AuthenticationResponse.builder()
+                .tokenType(TokenType.BEARER)
                 .token(jwtToken)
                 .build();
     }

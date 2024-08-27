@@ -1,9 +1,10 @@
-package ntd.calculator.api.dto.auth;
+package ntd.calculator.api.models.requests.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ntd.calculator.api.enums.TokenType;
 
 @Data
 @Builder
@@ -11,4 +12,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AuthenticationResponse {
     private String token;
+    private TokenType tokenType;
 }

@@ -1,4 +1,4 @@
-package ntd.calculator.api.model.user;
+package ntd.calculator.api.models.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,6 +26,7 @@ public class User implements UserDetails {
     private long id;
     @Column(unique = true, nullable = false)
     private String username;
+    @Column(nullable = false)
     private String password;
     private boolean status;
 

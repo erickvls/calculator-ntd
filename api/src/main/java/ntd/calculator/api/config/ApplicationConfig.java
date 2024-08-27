@@ -2,7 +2,7 @@ package ntd.calculator.api.config;
 
 
 import lombok.RequiredArgsConstructor;
-import ntd.calculator.api.repository.UserRepository;
+import ntd.calculator.api.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

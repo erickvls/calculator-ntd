@@ -1,4 +1,4 @@
-package ntd.calculator.api.dto.auth;
+package ntd.calculator.api.models.requests.auth;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

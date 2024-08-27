@@ -1,7 +1,7 @@
-package ntd.calculator.api.service.auth;
+package ntd.calculator.api.services.user;
 
 import lombok.RequiredArgsConstructor;
-import ntd.calculator.api.repository.UserRepository;
+import ntd.calculator.api.repositories.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

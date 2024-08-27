@@ -1,4 +1,4 @@
-package ntd.calculator.api.controller;
+package ntd.calculator.api.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

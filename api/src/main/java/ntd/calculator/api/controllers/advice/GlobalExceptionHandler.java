@@ -1,10 +1,11 @@
-package ntd.calculator.api.exception.advice;
+package ntd.calculator.api.controllers.advice;
 
-import ntd.calculator.api.dto.response.ErrorResponse;
+import ntd.calculator.api.models.responses.ErrorResponse;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -60,6 +61,17 @@ public class GlobalExceptionHandler {
         var errorResponse = new ErrorResponse(errorDetails);
         return buildResponse(HttpStatus.BAD_REQUEST, errorResponse);
     }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ErrorResponse> handleAccessDeniedException(AccessDeniedException ex) {
+        List<ErrorResponse.ErrorDetails.FieldError> fieldErrors = new ArrayList<>();
+        fieldErrors.add(new ErrorResponse.ErrorDetails.FieldError("credentials", "Access Denied"));
+
+        var errorDetails = new ErrorResponse.ErrorDetails(AUTHENTICATION_ERROR.getType(), fieldErrors);
+        var errorResponse = new ErrorResponse(errorDetails);
+        return buildResponse(HttpStatus.FORBIDDEN, errorResponse);
+    }
+
 
     private <T> ResponseEntity<T> buildResponse(HttpStatus status, T body) {
         return ResponseEntity

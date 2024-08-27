@@ -1,10 +1,10 @@
-package ntd.calculator.api.controller.auth;
+package ntd.calculator.api.controllers.auth;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import ntd.calculator.api.dto.auth.AuthenticationRequest;
-import ntd.calculator.api.dto.auth.AuthenticationResponse;
-import ntd.calculator.api.service.auth.AuthenticationService;
+import ntd.calculator.api.models.requests.auth.AuthenticationRequest;
+import ntd.calculator.api.models.requests.auth.AuthenticationResponse;
+import ntd.calculator.api.services.auth.AuthenticationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
