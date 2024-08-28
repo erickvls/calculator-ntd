@@ -20,8 +20,7 @@ api:
   path: api
   version: v1
 
-application:
-  security:
-    jwt:
-      secret-key:
-      expiration: 86400000 # a day
+app:
+  jwt:
+    secret-key:
+    expiration:
