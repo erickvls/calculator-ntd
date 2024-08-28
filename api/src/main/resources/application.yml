@@ -4,8 +4,8 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/calculator
     driver-class-name: org.postgresql.Driver
-    username:
-    password:
+    username: postgres
+    password: 123456
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -22,5 +22,5 @@ api:
 
 app:
   jwt:
-    secret-key:
-    expiration:
+    secret-key: 7uHZGR5ypNyM3o332NTqotDjbNQibLzVV+BUvEc3UhU=
+    expiration: 86400000 # a day

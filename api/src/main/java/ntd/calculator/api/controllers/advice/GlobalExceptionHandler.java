@@ -59,7 +59,7 @@ public class GlobalExceptionHandler {
 
         var errorDetails = new ErrorResponse.ErrorDetails(VALIDATION_ERROR.getType(), fieldErrors);
         var errorResponse = new ErrorResponse(errorDetails);
-        return buildResponse(HttpStatus.BAD_REQUEST, errorResponse);
+        return buildResponse(CONFLICT, errorResponse);
     }
 
     @ExceptionHandler(AccessDeniedException.class)
