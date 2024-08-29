@@ -3,6 +3,7 @@ package ntd.calculator.api.controllers;
 import lombok.RequiredArgsConstructor;
 import ntd.calculator.api.models.requests.CalculationRequest;
 import ntd.calculator.api.models.user.User;
+import ntd.calculator.api.services.CalculationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,13 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/calculator")
 @RequiredArgsConstructor
 public class CalculatorController {
-    @PostMapping(value = "/calculate", produces = MediaType.APPLICATION_JSON_VALUE)
+
+    private final CalculationService calculationService;
+
+    @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> calculate(
             @RequestBody CalculationRequest request,
             @AuthenticationPrincipal User user) {
-        //perform some action
+        var result = calculationService.performOperation();
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body("ok");
+                .body(result);
     }
 }
