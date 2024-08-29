@@ -23,15 +23,19 @@ public class Record {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "operation_id")
+    @JoinColumn(name = "operation_id", nullable = false)
     private Operation operation;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @Column(nullable = false)
     private BigDecimal amount;
+    @Column(nullable = false)
     private BigDecimal userBalance;
+    @Column(nullable = false)
     private String operationResponse;
+    @Column(nullable = false)
     private Date date;
 }
