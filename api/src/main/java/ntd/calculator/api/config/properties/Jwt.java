@@ -7,6 +7,5 @@ import lombok.Data;
 public class Jwt {
     @NotBlank
     private String secretKey;
-    @NotBlank
     private long expiration;
 }
