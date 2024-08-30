@@ -19,6 +19,9 @@ public class CalculationService {
 
     public CalculatorResponse performOperation(CalculationRequest calculationRequest, User userRequest) {
 
+        // First of all, checks if user has funds
+        accountService.checkUserHasEnoughFunds(userRequest);
+
         // Define what type of operation the user requires
         var arithmeticOperation = strategyContext.getStrategy(calculationRequest.getOperationType());
 
