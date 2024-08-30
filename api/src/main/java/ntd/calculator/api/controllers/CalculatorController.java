@@ -20,11 +20,11 @@ public class CalculatorController {
 
     private final CalculationService calculationService;
 
-    @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> calculate(
             @RequestBody CalculationRequest request,
             @AuthenticationPrincipal User user) {
-        var result = calculationService.performOperation();
+        var result = calculationService.performOperation(request, user);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(result);
