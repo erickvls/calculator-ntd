@@ -19,10 +19,10 @@ public class CalculationService {
 
     public CalculatorResponse performOperation(CalculationRequest calculationRequest, User userRequest) {
 
-        // Get the operation
+        // Define what type of operation the user requires
         var arithmeticOperation = strategyContext.getStrategy(calculationRequest.getOperationType());
 
-        // Get the cost of the operation from the service
+        // Get the operation (cost) from the service
         var operation = operationService.findOperationByOperationType(calculationRequest.getOperationType());
 
         // Get the arithmetic result
@@ -32,19 +32,19 @@ public class CalculationService {
         var account = accountService.deductFunds(userRequest, operation.getCost());
 
         // Register the operation in record table
-        var record = recordService.createRecord(userRequest, account, operation, operation.getCost(), result);
+        var recordResult = recordService.createRecord(userRequest, account, operation, operation.getCost(), result);
 
-        return createResponse(record);
+        return createResponse(recordResult);
     }
 
-    private CalculatorResponse createResponse(Record record){
+    private CalculatorResponse createResponse(Record recordResult) {
         return CalculatorResponse.builder()
-                .id(record.getId().toString())
-                .operationResponse(record.getOperationResponse())
-                .date(record.getDate().toString())
-                .amount(record.getAmount().toString())
-                .userBalance(record.getUserBalance().toString())
-                .operationType(record.getOperation().getType())
+                .id(recordResult.getId().toString())
+                .operationResponse(recordResult.getOperationResponse())
+                .date(recordResult.getDate().toString())
+                .amount(recordResult.getAmount().toString())
+                .userBalance(recordResult.getUserBalance().toString())
+                .operationType(recordResult.getOperation().getType())
                 .build();
     }
 

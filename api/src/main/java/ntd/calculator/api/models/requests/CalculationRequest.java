@@ -14,6 +14,6 @@ public class CalculationRequest {
     @NotNull
     private BigDecimal operand1;
 
-    @NotNull
+    // This field can be empty (in case of SquareRoot)
     private BigDecimal operand2;
 }
