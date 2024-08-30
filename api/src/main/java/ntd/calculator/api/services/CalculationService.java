@@ -1,7 +1,9 @@
 package ntd.calculator.api.services;
 
 import lombok.RequiredArgsConstructor;
+import ntd.calculator.api.models.record.Record;
 import ntd.calculator.api.models.requests.CalculationRequest;
+import ntd.calculator.api.models.responses.CalculatorResponse;
 import ntd.calculator.api.models.user.User;
 import ntd.calculator.api.strategy.StrategyContext;
 import org.springframework.stereotype.Service;
@@ -15,7 +17,7 @@ public class CalculationService {
     private final AccountService accountService;
     private final OperationService operationService;
 
-    public String performOperation(CalculationRequest calculationRequest, User userRequest) {
+    public CalculatorResponse performOperation(CalculationRequest calculationRequest, User userRequest) {
 
         // Get the operation
         var arithmeticOperation = strategyContext.getStrategy(calculationRequest.getOperationType());
@@ -32,7 +34,18 @@ public class CalculationService {
         // Register the operation in record table
         var record = recordService.createRecord(userRequest, account, operation, operation.getCost(), result);
 
-        return result.toString();
+        return createResponse(record);
+    }
+
+    private CalculatorResponse createResponse(Record record){
+        return CalculatorResponse.builder()
+                .id(record.getId().toString())
+                .operationResponse(record.getOperationResponse())
+                .date(record.getDate().toString())
+                .amount(record.getAmount().toString())
+                .userBalance(record.getUserBalance().toString())
+                .operationType(record.getOperation().getType())
+                .build();
     }
 
 }
