@@ -1,6 +1,5 @@
 package ntd.calculator.api.strategy;
 
-import lombok.RequiredArgsConstructor;
 import ntd.calculator.api.enums.OperationType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
