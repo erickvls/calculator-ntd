@@ -1,7 +1,9 @@
 package ntd.calculator.api.services.auth;
 
+import ntd.calculator.api.models.account.Account;
 import ntd.calculator.api.models.requests.auth.AuthenticationRequest;
 import ntd.calculator.api.models.user.User;
+import ntd.calculator.api.repositories.AccountRepository;
 import ntd.calculator.api.repositories.UserRepository;
 import ntd.calculator.api.services.auth.AuthenticationService;
 import ntd.calculator.api.services.auth.JwtService;
@@ -36,6 +38,9 @@ class AuthenticationServiceTest {
     @Mock
     private AuthenticationManager authenticationManager;
 
+    @Mock
+    private AccountRepository accountRepository;
+
     @InjectMocks
     private AuthenticationService authenticationService;
 
@@ -51,6 +56,7 @@ class AuthenticationServiceTest {
         when(passwordEncoder.encode(request.getPassword())).thenReturn("encodedPassword");
         when(userRepository.save(any(User.class))).thenReturn(user);
         when(jwtService.createToken(any(UserDetails.class))).thenReturn("jwtToken");
+        when(accountRepository.save(any(Account.class))).thenReturn(new Account());
 
         var response = authenticationService.register(request);
 
