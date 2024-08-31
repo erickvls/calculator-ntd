@@ -24,6 +24,16 @@ import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 @ControllerAdvice
 public class GlobalExceptionHandler extends BaseGlobalExceptionHandler {
 
+    @ExceptionHandler(ArithmeticException.class)
+    public ResponseEntity<ErrorResponse> handleArithmeticException(ArithmeticException ex) {
+        List<ErrorResponse.ErrorDetails.FieldError> fieldErrors = new ArrayList<>();
+        fieldErrors.add(new ErrorResponse.ErrorDetails.FieldError(FIELD_TYPE_OPERATION, ex.getMessage()));
+
+        var errorDetails = new ErrorResponse.ErrorDetails(OPERATION_ERROR.getType(), fieldErrors);
+        var errorResponse = new ErrorResponse(errorDetails);
+        return buildResponse(HttpStatus.NOT_FOUND, errorResponse);
+    }
+
     @ExceptionHandler(OperationNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleOperationNotFoundException(OperationNotFoundException ex) {
         List<ErrorResponse.ErrorDetails.FieldError> fieldErrors = new ArrayList<>();

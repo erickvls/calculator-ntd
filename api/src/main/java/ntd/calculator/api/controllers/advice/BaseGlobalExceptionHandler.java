@@ -10,6 +10,7 @@ public abstract class BaseGlobalExceptionHandler {
     protected static final String FIELD_TYPE_OPERATION = "operation";
     protected static final String FIELD_TYPE_ACCOUNT = "account";
 
+
     protected <T> ResponseEntity<T> buildResponse(HttpStatus status, T body) {
         return ResponseEntity
                 .status(status)

@@ -19,7 +19,7 @@ public class SquareRootStrategy implements CalculatorStrategy{
     @Override
     public BigDecimal calculate(BigDecimal firstOperand, BigDecimal secondOperand) {
         if (firstOperand.compareTo(BigDecimal.ZERO) < 0) {
-            throw new IllegalArgumentException("Cannot calculate square root of a negative number");
+            throw new ArithmeticException("Cannot calculate square root of a negative number");
         }
         // DECIMAL64 define the operation round
         return firstOperand.sqrt(MathContext.DECIMAL64);
