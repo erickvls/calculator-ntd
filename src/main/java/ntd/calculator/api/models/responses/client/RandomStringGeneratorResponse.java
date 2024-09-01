@@ -10,5 +10,5 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Builder
 public class RandomStringGeneratorResponse {
-    private RandomStringResultResponse randomStringResult;
+    private RandomStringResultResponse result = new RandomStringResultResponse();
 }
