@@ -35,7 +35,7 @@ public class CalculationService extends ResponseServiceBase{
         var account = accountService.deductFunds(userRequest, operation.getCost());
 
         // Register the operation in record table
-        var recordResult = recordService.createRecord(userRequest, account, operation, operation.getCost(), result);
+        var recordResult = recordService.createRecord(userRequest, account, operation, operation.getCost(), result.toString());
 
         return createResponse(recordResult);
     }

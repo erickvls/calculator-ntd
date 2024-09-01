@@ -58,6 +58,7 @@ public class RandomStringGeneratorClient {
                     .findFirst()
                     .orElse("");
         } catch (JsonProcessingException e) {
+            //TODO THROW EXCEPTION (ERROR FROM CLIENT)
             return body;
         }
     }

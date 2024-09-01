@@ -18,13 +18,13 @@ public class RecordService {
     private final RecordRepository recordRepository;
 
     @Transactional
-    public Record createRecord(User user, Account account, Operation operation, BigDecimal cost, BigDecimal result) {
+    public Record createRecord(User user, Account account, Operation operation, BigDecimal cost, String result) {
         var recordResult = Record.builder()
                 .user(user)
                 .amount(cost)
                 .operation(operation)
                 .userBalance(account.getBalance())
-                .operationResponse(result.toString())
+                .operationResponse(result)
                 .date(new Date())
                 .build();
 
