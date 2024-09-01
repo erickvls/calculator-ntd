@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class CalculationService {
+public class CalculationService extends ResponseServiceBase{
 
     private final StrategyContext strategyContext;
     private final RecordService recordService;
@@ -38,17 +38,6 @@ public class CalculationService {
         var recordResult = recordService.createRecord(userRequest, account, operation, operation.getCost(), result);
 
         return createResponse(recordResult);
-    }
-
-    private CalculatorResponse createResponse(Record recordResult) {
-        return CalculatorResponse.builder()
-                .id(recordResult.getId().toString())
-                .operationResponse(recordResult.getOperationResponse())
-                .date(recordResult.getDate().toString())
-                .amount(recordResult.getAmount().toString())
-                .userBalance(recordResult.getUserBalance().toString())
-                .operationType(recordResult.getOperation().getType())
-                .build();
     }
 
 }
