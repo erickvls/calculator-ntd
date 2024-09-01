@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: api
+  datasource:
+    url: ${DATABASE_URLCON}
+    driver-class-name: org.postgresql.Driver
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+api:
+  path: api
+  version: v1
+
+app:
+  jwt:
+    secret-key: ${APP_SECRET_KEY}
+    expiration: ${APP_EXPIRATION_JWT}
+  random-string:
+    client-uri: ${APP_RANDOM_STRING_URI}
+    api-key: ${APP_RANDOM_STRING_SECRET_KEY}
