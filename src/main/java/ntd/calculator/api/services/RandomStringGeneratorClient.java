@@ -54,7 +54,7 @@ public class RandomStringGeneratorClient {
     private String parseResponse(String body) {
         try {
             var json = objectMapper.readValue(body, RandomStringGeneratorResponse.class);
-            return json.getRandomStringResult().getRandom().getData().stream()
+            return json.getResult().getRandom().getData().stream()
                     .findFirst()
                     .orElse("");
         } catch (JsonProcessingException e) {
@@ -64,6 +64,7 @@ public class RandomStringGeneratorClient {
 
     private RandomStringGeneratorRequest createRequest() {
         return RandomStringGeneratorRequest.builder()
+                .jsonrpc("2.0")
                 .id(generateRandomId())
                 .method(METHOD_NAME)
                 .params(createParams())
