@@ -85,6 +85,6 @@ class AccountServiceTest {
         AccountNotFoundException exception = assertThrows(AccountNotFoundException.class, () -> {
             accountService.deductFunds(user, BigDecimal.TEN);
         });
-        assertEquals("Account not found this user: ", exception.getMessage());
+        assertEquals("Account not found this user", exception.getMessage());
     }
 }
