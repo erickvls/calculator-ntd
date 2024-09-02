@@ -74,7 +74,7 @@ class CalculationServiceTest {
         when(operationService.findOperationByOperationType(request.getOperationType())).thenReturn(operation);
         when(arithmeticOperation.calculate(request.getOperand1(), request.getOperand2())).thenReturn(BigDecimal.valueOf(30));
         when(accountService.deductFunds(user, operation.getCost())).thenReturn(account);
-        when(recordService.createRecord(user, account, operation, operation.getCost(), BigDecimal.valueOf(30))).thenReturn(record);
+        when(recordService.createRecord(user, account, operation, operation.getCost(), "30")).thenReturn(record);
 
         // Act
         var response = calculationService.performOperation(request, user);
@@ -135,6 +135,6 @@ class CalculationServiceTest {
         verify(strategyContext).getStrategy(request.getOperationType());
         verify(operationService).findOperationByOperationType(request.getOperationType());
         verify(accountService).deductFunds(user, operation.getCost());
-        verify(recordService).createRecord(user, account, operation, operation.getCost(), BigDecimal.valueOf(30));
+        verify(recordService).createRecord(user, account, operation, operation.getCost(), "30");
     }
 }

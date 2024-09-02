@@ -33,8 +33,7 @@ class RecordServiceTest {
     private Account account;
     private Operation operation;
     private BigDecimal cost;
-    private BigDecimal result;
-    private Record record;
+    private StringBuilder result;
 
     @BeforeEach
     void setUp() {
@@ -42,16 +41,8 @@ class RecordServiceTest {
         account = new Account();
         operation = new Operation();
         cost = new BigDecimal("100.00");
-        result = new BigDecimal("150.00");
+        result = new StringBuilder("150.00");
         account.setBalance(new BigDecimal("500.00"));
-        record = Record.builder()
-                .user(user)
-                .amount(cost)
-                .operation(operation)
-                .userBalance(account.getBalance())
-                .operationResponse(result.toString())
-                .date(new Date())
-                .build();
     }
 
     @Test
@@ -59,7 +50,7 @@ class RecordServiceTest {
 
         when(recordRepository.save(any(Record.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
-        var savedRecord = recordService.createRecord(user, account, operation, cost, result);
+        var savedRecord = recordService.createRecord(user, account, operation, cost, result.toString());
 
         assertEquals(user, savedRecord.getUser());
         assertEquals(cost, savedRecord.getAmount());
