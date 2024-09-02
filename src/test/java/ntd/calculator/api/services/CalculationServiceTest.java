@@ -66,7 +66,7 @@ class CalculationServiceTest {
     }
 
     @Test
-    void performOperation_ShouldPerformCalculationAndReturnResponse() {
+    void shouldPerformCalculationAndReturnResponse() {
         // Arrange
         var arithmeticOperation = mock(CalculatorStrategy.class);
 
