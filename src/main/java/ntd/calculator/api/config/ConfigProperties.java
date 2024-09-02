@@ -9,6 +9,11 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.annotation.Validated;
 
+/**
+ * Maps configuration properties defined in the YAML file
+ * using the "app" prefix. Includes settings for JWT and
+ * random string generation.
+ */
 @Data
 @Configuration
 @ConfigurationPropertiesScan

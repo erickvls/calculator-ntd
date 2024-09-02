@@ -17,6 +17,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+/**
+ * Service responsible for handling JWT (JSON Web Token) operations.
+ * This includes creating tokens, extracting claims, validating tokens,
+ * and managing token expiration.
+ */
 @Service
 @RequiredArgsConstructor
 public class JwtService {

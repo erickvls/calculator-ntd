@@ -19,6 +19,11 @@ import java.io.IOException;
 import static ntd.calculator.api.utility.CalculatorConstants.AUTHORIZATION;
 import static ntd.calculator.api.utility.CalculatorConstants.TOKEN_PREFIX;
 
+/**
+ * JWT authentication filter that checks for a valid JWT token in the
+ * Authorization header of incoming requests. If a valid token is found,
+ * the user is authenticated and the security context is updated accordingly.
+ */
 @Configuration
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {

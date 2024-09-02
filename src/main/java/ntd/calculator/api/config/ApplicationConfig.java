@@ -52,8 +52,8 @@ public class ApplicationConfig implements WebMvcConfigurer {
     }
 
     @Override
-    public void configurePathMatch(PathMatchConfigurer configurer) {
-        configurer.addPathPrefix("api/" + apiVersion, clazz -> true);
+    public void configurePathMatch(PathMatchConfigurer configure) {
+        configure.addPathPrefix("api/" + apiVersion, clazz -> true);
     }
 
     @Bean

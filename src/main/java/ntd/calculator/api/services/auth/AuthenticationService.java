@@ -18,6 +18,10 @@ import java.math.BigDecimal;
 
 import static ntd.calculator.api.utility.CalculatorConstants.INITIAL_VALUE;
 
+/**
+ * Service responsible for handling user registration and authentication.
+ * It manages user creation, account initialization, and JWT token generation.
+ */
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
