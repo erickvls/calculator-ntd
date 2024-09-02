@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import ntd.calculator.api.config.ConfigProperties;
+import ntd.calculator.api.exceptions.ParseResponseException;
 import ntd.calculator.api.models.requests.client.ParamsStringRequest;
 import ntd.calculator.api.models.requests.client.RandomStringGeneratorRequest;
 import ntd.calculator.api.models.responses.client.RandomStringGeneratorResponse;
@@ -58,8 +59,7 @@ public class RandomStringGeneratorClient {
                     .findFirst()
                     .orElse("");
         } catch (JsonProcessingException e) {
-            //TODO THROW EXCEPTION (ERROR FROM CLIENT)
-            return body;
+            throw new ParseResponseException(e.getMessage());
         }
     }
 
