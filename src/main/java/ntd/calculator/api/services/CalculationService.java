@@ -1,7 +1,6 @@
 package ntd.calculator.api.services;
 
 import lombok.RequiredArgsConstructor;
-import ntd.calculator.api.models.record.Record;
 import ntd.calculator.api.models.requests.CalculationRequest;
 import ntd.calculator.api.models.responses.CalculatorResponse;
 import ntd.calculator.api.models.user.User;
@@ -37,7 +36,7 @@ public class CalculationService extends ResponseServiceBase{
         // Register the operation in record table
         var recordResult = recordService.createRecord(userRequest, account, operation, operation.getCost(), result.toString());
 
-        return createResponse(recordResult);
+        return createCalculatorResponse(recordResult);
     }
 
 }

@@ -2,7 +2,6 @@ package ntd.calculator.api.services;
 
 import lombok.RequiredArgsConstructor;
 import ntd.calculator.api.enums.OperationType;
-import ntd.calculator.api.models.record.Record;
 import ntd.calculator.api.models.responses.CalculatorResponse;
 import ntd.calculator.api.models.user.User;
 import org.springframework.stereotype.Service;
@@ -35,6 +34,6 @@ public class RandomStringService extends ResponseServiceBase {
         // Register the operation in record table
         var recordResult = recordService.createRecord(userRequest, account, operation, operation.getCost(), randomString);
 
-        return createResponse(recordResult);
+        return createCalculatorResponse(recordResult);
     }
 }
