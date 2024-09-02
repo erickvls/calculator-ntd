@@ -38,4 +38,6 @@ public class Record {
     private String operationResponse;
     @Column(nullable = false)
     private Date date;
+    @Column(nullable = false)
+    private boolean deleted;
 }

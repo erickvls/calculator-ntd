@@ -29,6 +29,7 @@ public class RecordService extends ResponseServiceBase{
                 .operation(operation)
                 .userBalance(account.getBalance())
                 .operationResponse(result)
+                .deleted(false)
                 .date(new Date())
                 .build();
 

@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
+import static ntd.calculator.api.utility.CalculatorConstants.INITIAL_VALUE;
+
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
@@ -35,7 +37,7 @@ public class AuthenticationService {
 
         var account = Account.builder()
                 .user(user)
-                .balance(new BigDecimal("100.00"))
+                .balance(new BigDecimal(INITIAL_VALUE))
                 .build();
         accountRepository.save(account);
         return createAuthenticationResponse(user);

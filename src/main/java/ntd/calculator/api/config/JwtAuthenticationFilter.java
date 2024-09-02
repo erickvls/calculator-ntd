@@ -16,6 +16,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+import static ntd.calculator.api.utility.CalculatorConstants.AUTHORIZATION;
+import static ntd.calculator.api.utility.CalculatorConstants.TOKEN_PREFIX;
+
 @Configuration
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -30,11 +33,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
 
-        final String authHeader = request.getHeader("Authorization");
+        final String authHeader = request.getHeader(AUTHORIZATION);
         final String jwt;
         final String username;
 
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+        if (authHeader == null || !authHeader.startsWith(TOKEN_PREFIX)) {
             filterChain.doFilter(request, response);
             return;
         }
