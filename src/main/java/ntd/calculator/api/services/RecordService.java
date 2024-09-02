@@ -8,12 +8,13 @@ import ntd.calculator.api.models.record.Record;
 import ntd.calculator.api.models.responses.RecordResponse;
 import ntd.calculator.api.models.user.User;
 import ntd.calculator.api.repositories.RecordRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -34,10 +35,18 @@ public class RecordService extends ResponseServiceBase{
         return recordRepository.save(recordResult);
     }
 
-    public List<RecordResponse> findRecordsByUser(User user){
-        var records = recordRepository.findRecordByUser(user);
-        return records.stream()
-                .map(this::createRecordResponse)
-                .collect(Collectors.toList());
+    public Page<RecordResponse> findRecordsByUser(User user, int page, int size, String sort) {
+        var sortOrder = parseSort(sort);
+        var pageable = PageRequest.of(page, size, sortOrder);
+        var recordsPage = recordRepository.findRecordByUser(user, pageable);
+        return recordsPage.map(this::createRecordResponse);
+    }
+
+    private Sort parseSort(String sort) {
+        String[] sortParams = sort.split(",");
+        if (sortParams.length == 2) {
+            return Sort.by(Sort.Direction.fromString(sortParams[1]), sortParams[0]);
+        }
+        return Sort.unsorted();
     }
 }
