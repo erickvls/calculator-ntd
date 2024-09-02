@@ -17,6 +17,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.net.http.HttpClient;
+
 @Configuration
 @RequiredArgsConstructor
 public class ApplicationConfig implements WebMvcConfigurer {
@@ -52,5 +54,10 @@ public class ApplicationConfig implements WebMvcConfigurer {
     @Override
     public void configurePathMatch(PathMatchConfigurer configurer) {
         configurer.addPathPrefix("api/" + apiVersion, clazz -> true);
+    }
+
+    @Bean
+    public  HttpClient httpClient(){
+        return HttpClient.newBuilder().build();
     }
 }

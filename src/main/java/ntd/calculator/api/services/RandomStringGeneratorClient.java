@@ -28,7 +28,7 @@ public class RandomStringGeneratorClient {
 
     private final ConfigProperties configProperties;
     private final ObjectMapper objectMapper;
-    private final HttpClient httpClient = HttpClient.newBuilder().build();
+    private final HttpClient httpClient;
 
     public String generateString() throws IOException, InterruptedException {
         var uri = buildUri();
