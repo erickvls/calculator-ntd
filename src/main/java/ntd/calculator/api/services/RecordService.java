@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -35,7 +36,9 @@ public class RecordService extends ResponseServiceBase{
     }
 
     public List<RecordResponse> findRecordsByUser(User user){
-        var result = recordRepository.findRecordByUser(user);
-        return Collections.emptyList();
+        var records = recordRepository.findRecordByUser(user);
+        return records.stream()
+                .map(this::createRecordResponse)
+                .collect(Collectors.toList());
     }
 }
