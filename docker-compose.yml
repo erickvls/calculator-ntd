@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13
+    container_name: postgres_database
+    environment:
+      POSTGRES_DB: api_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+
+  app:
+    build: .
+    container_name: calculator-api
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: ${DATABASE_URLCON}
+      SPRING_DATASOURCE_USERNAME: ${DATABASE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${DATABASE_PASSWORD}
+      APP_SECRET_KEY: ${APP_SECRET_KEY}
+      APP_EXPIRATION_JWT: ${APP_EXPIRATION_JWT}
+      APP_RANDOM_STRING_URI: ${APP_RANDOM_STRING_URI}
+      APP_RANDOM_STRING_SECRET_KEY: ${APP_RANDOM_STRING_SECRET_KEY}
+  migrate:
+    image: postgres:13
+    container_name: postgres_migrate
+    depends_on:
+      - db
+    environment:
+      PGPASSWORD: ${DATABASE_PASSWORD}
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        until pg_isready -h db; do sleep 1; done
+        until psql -h db -U postgres -d api_db -c '\dt' | grep operation; do sleep 1; done
+        psql -h db -U postgres -d api_db -f /migrations/V1__initial_setup.sql
+    volumes:
+      - ./migrations:/migrations
