@@ -1,5 +1,6 @@
 package ntd.calculator.api.controllers;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import ntd.calculator.api.models.requests.CalculationRequest;
 import ntd.calculator.api.models.responses.CalculatorResponse;
@@ -24,7 +25,7 @@ public class CalculatorController {
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CalculatorResponse> calculate(
-            @RequestBody CalculationRequest request,
+            @Valid @RequestBody CalculationRequest request,
             @AuthenticationPrincipal User user) {
         var result = calculationService.performOperation(request, user);
         return ResponseEntity
