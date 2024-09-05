@@ -22,8 +22,8 @@ api:
 
 app:
   jwt:
-    secret-key: any-secret-key h256
-    expiration: 86400000 #default as a day
+    secret-key: 7uHZGR5ypNyM3o332NTqotDjbNQibLzVV+BUvEc3UhU=
+    expiration: 86400000 # a dayapp:
   random-string:
     client-uri: https://api.random.org/json-rpc/4/invoke
-    api-key: your-key-from-random-org
+    api-key: f208b6e8-5b25-45de-9598-578d296c45db
