@@ -1,7 +1,9 @@
 package ntd.calculator.api.services;
 
+import ntd.calculator.api.models.operation.Operation;
 import ntd.calculator.api.models.record.Record;
 import ntd.calculator.api.models.responses.CalculatorResponse;
+import ntd.calculator.api.models.responses.OperationResponse;
 import ntd.calculator.api.models.responses.RecordResponse;
 
 public abstract class ResponseServiceBase {
@@ -23,6 +25,13 @@ public abstract class ResponseServiceBase {
                 .date(recordResult.getDate().toString())
                 .userBalance(recordResult.getUserBalance().toString())
                 .operationType(recordResult.getOperation().getType())
+                .build();
+    }
+
+    public OperationResponse createOperationResponse(Operation operation) {
+        return OperationResponse.builder()
+                .cost(operation.getCost().toString())
+                .operationType(operation.getType())
                 .build();
     }
 }
