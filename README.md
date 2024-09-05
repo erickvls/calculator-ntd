@@ -84,11 +84,13 @@ Ensure you have the following installed:
 This project is set up to run easily using Docker and Docker Compose. To run the application locally:
 
 1. Clone the repository:
+
    ```bash
     git clone https://github.com/your-repo/calculator-api.git
     cd calculator-api
    
-2. Create an '.env' file at the root of the project with the following content: ```bash
+2. Create an '.env' file at the root of the project with the following content: 
+
    ```bash
     DATABASE_URLCON=jdbc:postgresql://db:5432/api_db
     DATABASE_USERNAME=postgres
@@ -98,6 +100,7 @@ This project is set up to run easily using Docker and Docker Compose. To run the
     APP_RANDOM_STRING_URI=https://api.random.org/json-rpc/4/invoke
     APP_RANDOM_STRING_SECRET_KEY=<YOUR_API_KEY>
    
+
 > Make sure you have those properties filled
 > otherwise it won't be possible to start the application
 > - **APP_SECRET_KEY**: You must have any secret key for JWT (H256), you can use the example above.
@@ -107,6 +110,8 @@ This project is set up to run easily using Docker and Docker Compose. To run the
 
 
 3. Start the application using Docker Compose:
+
+
     ```bash
     docker-compose up --build
 
