@@ -147,13 +147,10 @@ The application uses JWT (JSON Web Token) for authentication. After logging in, 
 ### JWT Example Login
 1. Login to obtain a token
    
-       POST /api/v1/auth/register
+       POST /api/v1/auth/login
 
-2. Use the token in the header for further requests:
-
-       Authorization: Bearer <your-token>
    
-3. The payload must be:
+2The payload must be:
     
        {
           "username": "youremail@email.com",
