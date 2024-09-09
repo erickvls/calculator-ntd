@@ -7,6 +7,7 @@ import ntd.calculator.api.models.responses.ErrorResponse;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
@@ -31,10 +32,10 @@ public class GlobalExceptionHandler extends BaseGlobalExceptionHandler {
 
         var errorDetails = new ErrorResponse.ErrorDetails(OPERATION_ERROR.getType(), fieldErrors);
         var errorResponse = new ErrorResponse(errorDetails);
-        return buildResponse(HttpStatus.NOT_FOUND, errorResponse);
+        return buildResponse(BAD_REQUEST, errorResponse);
     }
 
-    @ExceptionHandler(OperationNotFoundException.class)
+    @ExceptionHandler({OperationNotFoundException.class, HttpMessageNotReadableException.class})
     public ResponseEntity<ErrorResponse> handleOperationNotFoundException(OperationNotFoundException ex) {
         List<ErrorResponse.ErrorDetails.FieldError> fieldErrors = new ArrayList<>();
         fieldErrors.add(new ErrorResponse.ErrorDetails.FieldError(FIELD_TYPE_OPERATION, ex.getMessage()));
@@ -72,7 +73,7 @@ public class GlobalExceptionHandler extends BaseGlobalExceptionHandler {
                 String fieldName = ((FieldError) error).getField();
                 String errorMessage = error.getDefaultMessage();
                 fieldErrors.add(new ErrorResponse.ErrorDetails.FieldError(fieldName, errorMessage));
-            }else{
+            } else {
                 var objectName = error.getObjectName();
                 var errorMessage = error.getDefaultMessage();
                 fieldErrors.add(new ErrorResponse.ErrorDetails.FieldError(objectName, errorMessage));

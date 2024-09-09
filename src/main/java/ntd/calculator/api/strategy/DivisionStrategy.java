@@ -19,7 +19,7 @@ public class DivisionStrategy implements CalculatorStrategy {
     @Override
     public BigDecimal calculate(BigDecimal firstOperand, BigDecimal secondOperand) {
         if (secondOperand.compareTo(BigDecimal.ZERO) == 0) {
-            throw new ArithmeticException("Division by zero");
+            throw new ArithmeticException("Not possible divide a number by 0");
         }
         // Used HALF_UP for rounding the result
         return firstOperand.divide(secondOperand, RoundingMode.HALF_UP);
