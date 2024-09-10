@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import ntd.calculator.api.exceptions.AccountNotFoundException;
 import ntd.calculator.api.exceptions.InsufficientFundsException;
 import ntd.calculator.api.models.account.Account;
+import ntd.calculator.api.models.responses.AccountInfoResponse;
 import ntd.calculator.api.models.user.User;
 import ntd.calculator.api.repositories.AccountRepository;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,13 @@ public class AccountService {
         if (account.getBalance().compareTo(zero) <= 0) {
             throw new InsufficientFundsException("Insufficient balance for this user");
         }
+    }
+    public AccountInfoResponse findAccountInfo(User user){
+        var account = findAccountByUser(user);
+        return AccountInfoResponse.builder()
+                .email(user.getUsername())
+                .balance(account.getBalance().toString())
+                .build();
     }
 
     private Account findAccountByUser(User user) {

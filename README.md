@@ -150,7 +150,7 @@ The application uses JWT (JSON Web Token) for authentication. After logging in, 
        POST /api/v1/auth/login
 
    
-2The payload must be:
+2. The payload must be:
     
        {
           "username": "youremail@email.com",
