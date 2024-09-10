@@ -1,10 +1,9 @@
 package ntd.calculator.api.controllers;
 
 import lombok.RequiredArgsConstructor;
-import ntd.calculator.api.models.account.Account;
 import ntd.calculator.api.models.responses.AccountInfoResponse;
 import ntd.calculator.api.models.user.User;
-import ntd.calculator.api.services.AccountService;
+import ntd.calculator.api.services.impl.AccountServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AccountController {
 
-    private final AccountService accountService;
+    private final AccountServiceImpl accountService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AccountInfoResponse> accountInformation(

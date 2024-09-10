@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import ntd.calculator.api.models.requests.auth.AuthenticationRequest;
 import ntd.calculator.api.models.requests.auth.AuthenticationResponse;
-import ntd.calculator.api.services.auth.AuthenticationService;
+import ntd.calculator.api.services.auth.AuthenticationServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthenticationController {
 
-    private final AuthenticationService service;
+    private final AuthenticationServiceImpl service;
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(
            @Valid @RequestBody AuthenticationRequest request){

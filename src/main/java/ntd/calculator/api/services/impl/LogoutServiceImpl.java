@@ -1,4 +1,4 @@
-package ntd.calculator.api.services;
+package ntd.calculator.api.services.impl;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -10,21 +10,20 @@ import org.springframework.stereotype.Service;
 
 /**
  * This service handles the logout process in an application using JWT (JSON Web Token) for authentication.
-
+ * <p>
  * This class implements the LogoutHandler interface from Spring Security, allowing it to be automatically
  * invoked when a logout request is made.
-
+ * <p>
  * Unlike approaches where the JWT is stored in a database and can be explicitly revoked or marked as expired,
  * this implementation does not save tokens. Instead, the security context is simply cleared during logout,
  * effectively ending the user's current session.
-
+ * <p>
  * This approach is suitable for scenarios where it is unnecessary to manage or revoke tokens before their natural
  * expiration, simplifying the logout logic and improving process efficiency.
-
  */
 @Service
 @RequiredArgsConstructor
-public class LogoutService implements LogoutHandler {
+public class LogoutServiceImpl implements LogoutHandler {
     @Override
     public void logout(
             HttpServletRequest request,
@@ -32,7 +31,7 @@ public class LogoutService implements LogoutHandler {
             Authentication authentication
     ) {
         final String authHeader = request.getHeader("Authorization");
-        if (authHeader == null ||!authHeader.startsWith("Bearer ")) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             return;
         }
 

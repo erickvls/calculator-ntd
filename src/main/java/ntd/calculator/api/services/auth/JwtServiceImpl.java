@@ -8,6 +8,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import ntd.calculator.api.config.ConfigProperties;
+import ntd.calculator.api.services.JwtService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -24,12 +25,24 @@ import java.util.function.Function;
  */
 @Service
 @RequiredArgsConstructor
-public class JwtService {
+public class JwtServiceImpl implements JwtService {
 
     private final ConfigProperties configProperties;
 
+    @Override
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
+    }
+
+    @Override
+    public String createToken(UserDetails userDetails) {
+        return createToken(new HashMap<>(), userDetails);
+    }
+
+    @Override
+    public boolean isTokenValid(String token, UserDetails userDetails) {
+        final var username = extractUsername(token);
+        return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
 
     private <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
@@ -37,14 +50,10 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
-    public String createToken(UserDetails userDetails){
-        return createToken(new HashMap<>(), userDetails);
-    }
-
     private String createToken(
             Map<String, Object> claims,
             UserDetails userDetails
-    ){
+    ) {
         var expiration = configProperties.getJwt().getExpiration();
         return Jwts
                 .builder()
@@ -54,11 +63,6 @@ public class JwtService {
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(getSignInkey(), SignatureAlgorithm.HS256)
                 .compact();
-    }
-
-    public boolean isTokenValid(String token, UserDetails userDetails){
-        final var username = extractUsername(token);
-        return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
 
     private boolean isTokenExpired(String token) {

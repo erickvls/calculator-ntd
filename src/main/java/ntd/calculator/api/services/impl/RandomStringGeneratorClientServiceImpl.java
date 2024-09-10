@@ -1,4 +1,4 @@
-package ntd.calculator.api.services;
+package ntd.calculator.api.services.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,6 +8,7 @@ import ntd.calculator.api.exceptions.ParseResponseException;
 import ntd.calculator.api.models.requests.client.ParamsStringRequest;
 import ntd.calculator.api.models.requests.client.RandomStringGeneratorRequest;
 import ntd.calculator.api.models.responses.client.RandomStringGeneratorResponse;
+import ntd.calculator.api.services.RandomStringGeneratorClientService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -24,12 +25,13 @@ import static ntd.calculator.api.utility.RandomStringConstants.*;
 
 @Service
 @RequiredArgsConstructor
-public class RandomStringGeneratorClient {
+public class RandomStringGeneratorClientServiceImpl implements RandomStringGeneratorClientService {
 
     private final ConfigProperties configProperties;
     private final ObjectMapper objectMapper;
     private final HttpClient httpClient;
 
+    @Override
     public String generateString() throws IOException, InterruptedException {
         var uri = buildUri();
         var requestObject = createRequest();

@@ -8,6 +8,7 @@ import ntd.calculator.api.models.requests.auth.AuthenticationResponse;
 import ntd.calculator.api.models.user.User;
 import ntd.calculator.api.repositories.AccountRepository;
 import ntd.calculator.api.repositories.UserRepository;
+import ntd.calculator.api.services.AuthenticationService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,13 +25,15 @@ import static ntd.calculator.api.utility.CalculatorConstants.INITIAL_VALUE;
  */
 @Service
 @RequiredArgsConstructor
-public class AuthenticationService {
+public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final UserRepository userRepository;
     private final AccountRepository accountRepository;
     private final PasswordEncoder passwordEncoder;
-    private final JwtService jwtService;
+    private final JwtServiceImpl jwtService;
     private final AuthenticationManager authenticationManager;
+
+    @Override
     public AuthenticationResponse register(AuthenticationRequest request) {
         var user = User.builder()
                 .username(request.getUsername())
@@ -47,18 +50,19 @@ public class AuthenticationService {
         return createAuthenticationResponse(user);
     }
 
+    @Override
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(
-                    request.getUsername(),
-                    request.getPassword()
-            )
+                new UsernamePasswordAuthenticationToken(
+                        request.getUsername(),
+                        request.getPassword()
+                )
         );
         var user = userRepository.findByUsername(request.getUsername()).orElseThrow();
         return createAuthenticationResponse(user);
     }
 
-    private AuthenticationResponse createAuthenticationResponse(UserDetails user){
+    private AuthenticationResponse createAuthenticationResponse(UserDetails user) {
         var jwtToken = jwtService.createToken(user);
         return AuthenticationResponse.builder()
                 .tokenType(TokenType.BEARER)

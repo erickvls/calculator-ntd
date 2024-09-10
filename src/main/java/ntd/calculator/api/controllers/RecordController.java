@@ -1,11 +1,9 @@
 package ntd.calculator.api.controllers;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
-import ntd.calculator.api.models.record.Record;
 import ntd.calculator.api.models.responses.RecordResponse;
 import ntd.calculator.api.models.user.User;
-import ntd.calculator.api.services.RecordService;
+import ntd.calculator.api.services.impl.RecordServiceImpl;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class RecordController {
 
-    private final RecordService recordService;
+    private final RecordServiceImpl recordService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Page<RecordResponse>> records(
