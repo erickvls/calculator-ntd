@@ -2,6 +2,7 @@ package ntd.calculator.api.services;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import ntd.calculator.api.exceptions.RecordNotFoundException;
 import ntd.calculator.api.models.account.Account;
 import ntd.calculator.api.models.operation.Operation;
 import ntd.calculator.api.models.record.Record;
@@ -39,9 +40,17 @@ public class RecordService extends ResponseServiceBase{
     public Page<RecordResponse> findRecordsByUser(User user, int page, int size, String sort) {
         var sortOrder = parseSort(sort);
         var pageable = PageRequest.of(page, size, sortOrder);
-        var recordsPage = recordRepository.findRecordByUser(user, pageable);
+        var recordsPage = recordRepository.findRecordByUserAndDeletedIsFalse(user, pageable);
         return recordsPage.map(this::createRecordResponse);
     }
+
+    @Transactional
+    public void deleteRecord(User user, Long recordId){
+        var userRecord = recordRepository.findByIdAndUser(recordId, user).orElseThrow(() -> new RecordNotFoundException("Record not found"));
+        userRecord.setDeleted(true);
+        recordRepository.save(userRecord);
+    }
+
 
     private Sort parseSort(String sort) {
         String[] sortParams = sort.split(",");

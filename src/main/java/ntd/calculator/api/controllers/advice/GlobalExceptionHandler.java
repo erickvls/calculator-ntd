@@ -3,6 +3,7 @@ package ntd.calculator.api.controllers.advice;
 import ntd.calculator.api.exceptions.AccountNotFoundException;
 import ntd.calculator.api.exceptions.InsufficientFundsException;
 import ntd.calculator.api.exceptions.OperationNotFoundException;
+import ntd.calculator.api.exceptions.RecordNotFoundException;
 import ntd.calculator.api.models.responses.ErrorResponse;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -114,6 +115,17 @@ public class GlobalExceptionHandler extends BaseGlobalExceptionHandler {
         var errorDetails = new ErrorResponse.ErrorDetails(AUTHENTICATION_ERROR.getType(), fieldErrors);
         var errorResponse = new ErrorResponse(errorDetails);
         return buildResponse(HttpStatus.FORBIDDEN, errorResponse);
+    }
+
+
+    @ExceptionHandler(RecordNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleRecordNotFoundException(RecordNotFoundException ex) {
+        List<ErrorResponse.ErrorDetails.FieldError> fieldErrors = new ArrayList<>();
+        fieldErrors.add(new ErrorResponse.ErrorDetails.FieldError(FIELD_TYPE_OPERATION, ex.getMessage()));
+
+        var errorDetails = new ErrorResponse.ErrorDetails(OPERATION_ERROR.getType(), fieldErrors);
+        var errorResponse = new ErrorResponse(errorDetails);
+        return buildResponse(HttpStatus.BAD_REQUEST, errorResponse);
     }
 
     @ExceptionHandler(Exception.class)

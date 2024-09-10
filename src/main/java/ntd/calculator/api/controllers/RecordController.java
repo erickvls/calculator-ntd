@@ -1,6 +1,8 @@
 package ntd.calculator.api.controllers;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import ntd.calculator.api.models.record.Record;
 import ntd.calculator.api.models.responses.RecordResponse;
 import ntd.calculator.api.models.user.User;
 import ntd.calculator.api.services.RecordService;
@@ -9,10 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/records")
@@ -31,5 +30,13 @@ public class RecordController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(result);
+    }
+
+    @DeleteMapping("{recordId}")
+    public ResponseEntity<Void> deleteRecord(
+            @AuthenticationPrincipal User user,
+            @PathVariable Long recordId)  {
+        recordService.deleteRecord(user, recordId);
+        return ResponseEntity.noContent().build();
     }
 }

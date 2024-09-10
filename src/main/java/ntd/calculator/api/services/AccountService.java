@@ -36,7 +36,7 @@ public class AccountService {
 
     private Account findAccountByUser(User user) {
         return accountRepository.findByUser(user)
-                .orElseThrow(() -> new AccountNotFoundException("Account not found this user"));
+                .orElseThrow(() -> new AccountNotFoundException("Account not found for this user"));
     }
 
     private void checkUserFundsForOperation(Account account, BigDecimal operationCost) {
