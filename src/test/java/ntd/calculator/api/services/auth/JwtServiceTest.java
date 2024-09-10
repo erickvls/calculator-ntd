@@ -6,6 +6,7 @@ import io.jsonwebtoken.io.Encoders;
 import io.jsonwebtoken.security.Keys;
 import ntd.calculator.api.config.ConfigProperties;
 import ntd.calculator.api.config.properties.Jwt;
+import ntd.calculator.api.services.JwtService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -25,7 +26,7 @@ import static org.mockito.Mockito.when;
 class JwtServiceTest {
 
     @InjectMocks
-    private JwtService jwtService;
+    private JwtServiceImpl jwtService;
 
     @Mock
     private UserDetails userDetails;

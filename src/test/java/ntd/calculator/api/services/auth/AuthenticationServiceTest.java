@@ -5,8 +5,6 @@ import ntd.calculator.api.models.requests.auth.AuthenticationRequest;
 import ntd.calculator.api.models.user.User;
 import ntd.calculator.api.repositories.AccountRepository;
 import ntd.calculator.api.repositories.UserRepository;
-import ntd.calculator.api.services.auth.AuthenticationService;
-import ntd.calculator.api.services.auth.JwtService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -34,7 +32,7 @@ class AuthenticationServiceTest {
     @Mock
     private PasswordEncoder passwordEncoder;
     @Mock
-    private JwtService jwtService;
+    private JwtServiceImpl jwtService;
     @Mock
     private AuthenticationManager authenticationManager;
 
@@ -42,7 +40,7 @@ class AuthenticationServiceTest {
     private AccountRepository accountRepository;
 
     @InjectMocks
-    private AuthenticationService authenticationService;
+    private AuthenticationServiceImpl authenticationService;
 
     @Test
     void shouldRegisterUser() {

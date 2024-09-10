@@ -5,6 +5,7 @@ import ntd.calculator.api.exceptions.InsufficientFundsException;
 import ntd.calculator.api.models.account.Account;
 import ntd.calculator.api.models.user.User;
 import ntd.calculator.api.repositories.AccountRepository;
+import ntd.calculator.api.services.impl.AccountServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,7 +28,7 @@ class AccountServiceTest {
     private AccountRepository accountRepository;
 
     @InjectMocks
-    private AccountService accountService;
+    private AccountServiceImpl accountService;
 
     private User user;
     private Account account;
@@ -85,6 +86,6 @@ class AccountServiceTest {
         AccountNotFoundException exception = assertThrows(AccountNotFoundException.class, () -> {
             accountService.deductFunds(user, BigDecimal.TEN);
         });
-        assertEquals("Account not found this user", exception.getMessage());
+        assertEquals("Account not found for this user", exception.getMessage());
     }
 }

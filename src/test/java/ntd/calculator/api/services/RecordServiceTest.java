@@ -5,6 +5,7 @@ import ntd.calculator.api.models.operation.Operation;
 import ntd.calculator.api.models.record.Record;
 import ntd.calculator.api.models.user.User;
 import ntd.calculator.api.repositories.RecordRepository;
+import ntd.calculator.api.services.impl.RecordServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,7 +14,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -27,7 +27,7 @@ class RecordServiceTest {
     private RecordRepository recordRepository;
 
     @InjectMocks
-    private RecordService recordService;
+    private RecordServiceImpl recordService;
 
     private User user;
     private Account account;

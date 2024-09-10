@@ -6,6 +6,7 @@ import ntd.calculator.api.models.account.Account;
 import ntd.calculator.api.models.operation.Operation;
 import ntd.calculator.api.models.record.Record;
 import ntd.calculator.api.models.user.User;
+import ntd.calculator.api.services.impl.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,19 +25,19 @@ import static org.mockito.Mockito.*;
 class RandomStringServiceTest {
 
     @Mock
-    private RandomStringGeneratorClient stringGeneratorClient;
+    private RandomStringGeneratorClientServiceImpl stringGeneratorClient;
 
     @Mock
-    private AccountService accountService;
+    private AccountServiceImpl accountService;
 
     @Mock
-    private OperationService operationService;
+    private OperationServiceImpl operationService;
 
     @Mock
-    private RecordService recordService;
+    private RecordServiceImpl recordService;
 
     @InjectMocks
-    private RandomStringService randomStringService;
+    private RandomStringServiceImpl randomStringService;
 
     private User user;
     private Operation operation;

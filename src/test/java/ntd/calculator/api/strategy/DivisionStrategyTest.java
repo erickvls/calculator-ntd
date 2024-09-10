@@ -41,7 +41,7 @@ class DivisionStrategyTest {
             divisionStrategy.calculate(firstOperand, secondOperand);
         });
 
-        assertEquals("Division by zero", exception.getMessage());
+        assertEquals("Not possible divide a number by 0", exception.getMessage());
     }
 
     @Test

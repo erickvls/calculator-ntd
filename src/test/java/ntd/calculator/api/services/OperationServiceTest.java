@@ -4,6 +4,7 @@ import ntd.calculator.api.enums.OperationType;
 import ntd.calculator.api.exceptions.OperationNotFoundException;
 import ntd.calculator.api.models.operation.Operation;
 import ntd.calculator.api.repositories.OperationRepository;
+import ntd.calculator.api.services.impl.OperationServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,7 +25,7 @@ class OperationServiceTest {
     private OperationRepository operationRepository;
 
     @InjectMocks
-    private OperationService operationService;
+    private OperationServiceImpl operationService;
 
     private Operation operation;
     private OperationType operationType;

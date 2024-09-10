@@ -7,6 +7,10 @@ import ntd.calculator.api.models.operation.Operation;
 import ntd.calculator.api.models.record.Record;
 import ntd.calculator.api.models.requests.CalculationRequest;
 import ntd.calculator.api.models.user.User;
+import ntd.calculator.api.services.impl.AccountServiceImpl;
+import ntd.calculator.api.services.impl.CalculationServiceImpl;
+import ntd.calculator.api.services.impl.OperationServiceImpl;
+import ntd.calculator.api.services.impl.RecordServiceImpl;
 import ntd.calculator.api.strategy.AdditionStrategy;
 import ntd.calculator.api.strategy.CalculatorStrategy;
 import ntd.calculator.api.strategy.StrategyContext;
@@ -30,16 +34,16 @@ class CalculationServiceTest {
     private StrategyContext strategyContext;
 
     @Mock
-    private RecordService recordService;
+    private RecordServiceImpl recordService;
 
     @Mock
-    private AccountService accountService;
+    private AccountServiceImpl accountService;
 
     @Mock
-    private OperationService operationService;
+    private OperationServiceImpl operationService;
 
     @InjectMocks
-    private CalculationService calculationService;
+    private CalculationServiceImpl calculationService;
 
     private User user;
     private CalculationRequest request;

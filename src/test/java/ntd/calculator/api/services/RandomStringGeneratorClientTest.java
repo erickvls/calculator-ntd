@@ -9,6 +9,7 @@ import ntd.calculator.api.models.requests.client.RandomStringGeneratorRequest;
 import ntd.calculator.api.models.responses.client.RandomStringGeneratorResponse;
 import ntd.calculator.api.models.responses.client.RandomStringResultResponse;
 import ntd.calculator.api.models.responses.client.ResultRandomString;
+import ntd.calculator.api.services.impl.RandomStringGeneratorClientServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -43,7 +44,7 @@ class RandomStringGeneratorClientTest {
     private HttpResponse<String> httpResponse;
 
     @InjectMocks
-    private RandomStringGeneratorClient randomStringGeneratorClient;
+    private RandomStringGeneratorClientServiceImpl randomStringGeneratorClient;
 
 
     @Test
