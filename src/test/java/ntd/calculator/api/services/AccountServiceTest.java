@@ -38,7 +38,7 @@ class AccountServiceTest {
         user = new User();
         account = new Account();
         account.setUser(user);
-        account.setBalance(new BigDecimal("100.00"));
+        account.setBalance(new BigDecimal("200.00"));
     }
 
     @Test
@@ -77,7 +77,7 @@ class AccountServiceTest {
         InsufficientFundsException exception = assertThrows(InsufficientFundsException.class, () -> {
             accountService.checkUserHasEnoughFunds(user);
         });
-        assertEquals("Insufficient balance for this user", exception.getMessage());
+        assertEquals("Insufficient balance", exception.getMessage());
     }
 
     @Test
@@ -86,6 +86,6 @@ class AccountServiceTest {
         AccountNotFoundException exception = assertThrows(AccountNotFoundException.class, () -> {
             accountService.deductFunds(user, BigDecimal.TEN);
         });
-        assertEquals("Account not found for this user", exception.getMessage());
+        assertEquals("Account not found", exception.getMessage());
     }
 }

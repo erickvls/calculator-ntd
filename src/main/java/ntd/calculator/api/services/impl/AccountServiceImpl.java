@@ -34,7 +34,7 @@ public class AccountServiceImpl implements AccountService {
         var account = findAccountByUser(user);
         var zero = BigDecimal.ZERO;
         if (account.getBalance().compareTo(zero) <= 0) {
-            throw new InsufficientFundsException("Insufficient balance for this user");
+            throw new InsufficientFundsException("Insufficient balance");
         }
     }
 
@@ -49,7 +49,7 @@ public class AccountServiceImpl implements AccountService {
 
     private Account findAccountByUser(User user) {
         return accountRepository.findByUser(user)
-                .orElseThrow(() -> new AccountNotFoundException("Account not found for this user"));
+                .orElseThrow(() -> new AccountNotFoundException("Account not found"));
     }
 
     private void checkUserFundsForOperation(Account account, BigDecimal operationCost) {

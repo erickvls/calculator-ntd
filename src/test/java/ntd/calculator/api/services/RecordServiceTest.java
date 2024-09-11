@@ -40,7 +40,7 @@ class RecordServiceTest {
         user = new User();
         account = new Account();
         operation = new Operation();
-        cost = new BigDecimal("100.00");
+        cost = new BigDecimal("200.00");
         result = new StringBuilder("150.00");
         account.setBalance(new BigDecimal("500.00"));
     }
