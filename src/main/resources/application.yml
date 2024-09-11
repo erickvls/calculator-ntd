@@ -2,28 +2,27 @@ spring:
   application:
     name: api
   datasource:
-    url: jdbc:postgresql://localhost:5432/calculator
+    url: ${DATABASE_URLCON}
     driver-class-name: org.postgresql.Driver
-    username: postgres
-    password: 123456
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
   jpa:
     hibernate:
-      ddl-auto: create-drop
-    show-sql: true
+      ddl-auto: update
+    show-sql: false
     properties:
       hibernate:
         format_sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-
 api:
   path: api
   version: v1
 
 app:
   jwt:
-    secret-key: 7uHZGR5ypNyM3o332NTqotDjbNQibLzVV+BUvEc3UhU=
-    expiration: 86400000 # a dayapp:
+    secret-key: ${APP_SECRET_KEY}
+    expiration: ${APP_EXPIRATION_JWT}
   random-string:
-    client-uri: https://api.random.org/json-rpc/4/invoke
-    api-key: f208b6e8-5b25-45de-9598-578d296c45db
+    client-uri: ${APP_RANDOM_STRING_URI}
+    api-key: ${APP_RANDOM_STRING_SECRET_KEY}
