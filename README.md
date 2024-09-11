@@ -6,21 +6,37 @@
 2. [Features](#features)
 3. [Technologies Used](#technologies-used)
 4. [Problem Description](#problem-description)
-    - [Operation Costs](#operation-costs)
-    - [Initial User Balance](#initial-user-balance)
+   - [Operation Costs](#operation-costs)
+   - [Initial User Balance](#initial-user-balance)
 5. [Running the Application](#running-the-application)
-    - [Prerequisites](#prerequisites)
-    - [Docker Setup](#docker-setup)
-6. [Swagger UI](#swagger-ui)
-7. [Authentication](#authentication)
-    - [JWT Example Sign Up](#jwt-example-sign-up)
-    - [JWT Example Login](#jwt-example-login)
-8. [Database](#database)
-9. [Notes](#notes)
+   - [Prerequisites](#prerequisites)
+   - [Docker Setup](#docker-setup)
+   - [Docker File](#docker-file)
+   - [Docker Compose File](#docker-compose-file)
+6. [Authentication](#authentication)
+   - [JWT Example Sign Up](#jwt-example-sign-up)
+   - [JWT Example Login](#jwt-example-login)
+7. [Endpoints](#endpoints)
+   - [Calculation](#calculation)
+   - [Generate String](#generate-string)
+   - [Records](#records)
+   - [Account Information](#account-information)
+8. [Swagger UI](#swagger-ui)
+9. [Database](#database)
+10. [Notes](#notes)
 
 ## Overview
 
 This project is developed for **NTD** as part of an evaluation. The goal is to implement a web platform that provides basic calculator functionalities such as addition, subtraction, multiplication, division, square root calculation, and random string generation. Each functionality is assigned a specific cost per request, which can be configured. The platform ensures that the user's balance is deducted based on the cost of each operation.
+
+- This project is composed for two modules:
+   - **The API** - This project
+   - **The UI**  - You can check it [here](https://github.com/erickvls/calculator-ntd-web)
+
+
+## Live version
+
+- API: https://calculator-ntd-api-72fc22c68f7d.herokuapp.com/api/v1/swagger-ui.html
 
 ## Features
 
@@ -65,7 +81,7 @@ Each operation has an associated cost, which is deducted from the user's balance
 - Random String Generation: $30.00
 
 ### Initial User Balance
-When a user is created, they start with an initial balance of $100.00.
+When a user is created, they start with an initial balance of $200.00.
 
 ## Running the Application
 
@@ -88,8 +104,8 @@ This project is set up to run easily using Docker and Docker Compose. To run the
    ```bash
     git clone https://github.com/your-repo/calculator-api.git
     cd calculator-api
-   
-2. Create an '.env' file at the root of the project with the following content: 
+
+2. Create an '.env' file at the root of the project with the following content:
 
    ```bash
     DATABASE_URLCON=jdbc:postgresql://db:5432/api_db
@@ -99,10 +115,13 @@ This project is set up to run easily using Docker and Docker Compose. To run the
     APP_EXPIRATION_JWT=86400000
     APP_RANDOM_STRING_URI=https://api.random.org/json-rpc/4/invoke
     APP_RANDOM_STRING_SECRET_KEY=<YOUR_API_KEY>
-   
+
+
 
 > Make sure you have those properties filled
 > otherwise it won't be possible to start the application
+
+
 > - **APP_SECRET_KEY**: You must have any secret key for JWT (H256), you can use the example above.
 > - **APP_RANDOM_STRING_URI**: It is the API that the project is going to consume to generate random string
 > - **APP_RANDOM_STRING_SECRET_KEY**: You need to have an account and use your api_key in order to make a request.
@@ -112,7 +131,7 @@ This project is set up to run easily using Docker and Docker Compose. To run the
 3. Start the application using Docker Compose:
 
 
-    ```bash
+
     docker-compose up --build
 
 This will build the application and start both the API and the PostgreSQL database. The **Operation** table will be pre-populated with the available operations (addition, subtraction, multiplication, etc.) to avoid the need for manual entries.
@@ -124,11 +143,6 @@ The Dockerfile builds a Maven project and creates a lightweight image to run the
 ### Docker Compose File
 The docker-compose.yml file includes services for the database, application, and migration setup
 
-### Swagger UI
-Swagger provides an interactive interface where you can test the API endpoints. To explore the API using Swagger UI, visit:
-
-    /api/v1/swagger-ui.html
-
 
 ## Authentication
 The application uses JWT (JSON Web Token) for authentication. After logging in, a token is generated and must be included in the Authorization header for all subsequent requests. The system does not currently store or manage tokens, which means there is no token refresh or logout functionality. In a real-world scenario, token storage and invalidation should be implemented to allow proper user logout.
@@ -138,7 +152,7 @@ The application uses JWT (JSON Web Token) for authentication. After logging in, 
 
        POST /api/v1/auth/register
 2. The payload must be:
-   
+
        {
           "username": "youremail@email.com",
           "password": "yourpassword"
@@ -146,20 +160,66 @@ The application uses JWT (JSON Web Token) for authentication. After logging in, 
 
 ### JWT Example Login
 1. Login to obtain a token
-   
+
        POST /api/v1/auth/login
 
-   
+
 2. The payload must be:
-    
+
        {
           "username": "youremail@email.com",
           "password": "yourpassword"
        }
-   
+
+
+## Endpoints
 All others resources are protected. That means if you want to access any resource that is protected you must include your bearer token into the request.
 
     Authorization: Bearer <your-token>
+### Calculation
+#### Operation Types
+
+1. For this test, it was considered a basic operation between two operands. An operation type should be included in the request
+
+       ADDITION, SUBTRACTION, MULTIPLICATION, DIVISION , SQUARE_ROOT, RANDOM_STRING
+
+2. Make a request to the following path:
+
+       POST /api/v1/calculator
+3. The payload must be:
+
+       {
+         "operationType": "operationType",
+         "operand1": 30,
+         "operand2": 340
+       }
+
+### Generate String
+1. Make a request to the following path:
+
+       GET /api/v1/calculator/generate
+
+
+### Records
+1. You can retrieve the paginated records from a user by the following path:
+
+       GET /api/v1/records
+
+
+2. You can delete one specific record by the following path:
+
+        DELETE /api/v1/records/{id}
+
+### Account Information
+1. A user can retrieve your account information (username, balance) by the following path:
+
+       GET /api/v1/account
+
+
+### Swagger UI
+Swagger provides an interactive interface where you can test the API endpoints. To explore the API using Swagger UI, visit:
+
+    /api/v1/swagger-ui.html
 
 ## Database
 - The application uses PostgreSQL to store user data, operation history, and other relevant information.
