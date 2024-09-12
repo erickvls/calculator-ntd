@@ -9,6 +9,7 @@ import ntd.calculator.api.models.user.User;
 import ntd.calculator.api.repositories.AccountRepository;
 import ntd.calculator.api.repositories.UserRepository;
 import ntd.calculator.api.services.AuthenticationService;
+import ntd.calculator.api.services.JwtService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,7 +31,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final UserRepository userRepository;
     private final AccountRepository accountRepository;
     private final PasswordEncoder passwordEncoder;
-    private final JwtServiceImpl jwtService;
+    private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
     @Override

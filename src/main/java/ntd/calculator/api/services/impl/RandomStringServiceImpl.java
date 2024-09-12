@@ -15,8 +15,8 @@ public class RandomStringServiceImpl extends ResponseServiceBase implements Rand
 
     private final RandomStringGeneratorClientServiceImpl stringGeneratorClient;
     private final AccountService accountService;
-    private final OperationServiceImpl operationService;
-    private final RecordServiceImpl recordService;
+    private final OperationService operationService;
+    private final RecordService recordService;
 
     @Override
     public CalculatorResponse generateRandomString(User userRequest) throws IOException, InterruptedException {

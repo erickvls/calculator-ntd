@@ -5,8 +5,8 @@ import lombok.RequiredArgsConstructor;
 import ntd.calculator.api.models.requests.CalculationRequest;
 import ntd.calculator.api.models.responses.CalculatorResponse;
 import ntd.calculator.api.models.user.User;
-import ntd.calculator.api.services.impl.CalculationServiceImpl;
-import ntd.calculator.api.services.impl.RandomStringServiceImpl;
+import ntd.calculator.api.services.CalculationService;
+import ntd.calculator.api.services.RandomStringService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +20,8 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class CalculatorController {
 
-    private final CalculationServiceImpl calculationService;
-    private final RandomStringServiceImpl randomStringService;
+    private final CalculationService calculationService;
+    private final RandomStringService randomStringService;
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CalculatorResponse> calculate(

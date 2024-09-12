@@ -2,7 +2,7 @@ package ntd.calculator.api.controllers;
 
 import lombok.RequiredArgsConstructor;
 import ntd.calculator.api.models.responses.OperationResponse;
-import ntd.calculator.api.services.impl.OperationServiceImpl;
+import ntd.calculator.api.services.OperationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OperationController {
 
-    private final OperationServiceImpl operationService;
+    private final OperationService operationService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<OperationResponse>> records()  {

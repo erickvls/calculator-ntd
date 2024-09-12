@@ -13,9 +13,9 @@ import org.springframework.stereotype.Service;
 public class CalculationServiceImpl extends ResponseServiceBase implements CalculationService {
 
     private final StrategyContext strategyContext;
-    private final RecordServiceImpl recordService;
+    private final RecordService recordService;
     private final AccountService accountService;
-    private final OperationServiceImpl operationService;
+    private final OperationService operationService;
 
     @Override
     public CalculatorResponse performOperation(CalculationRequest calculationRequest, User userRequest) {

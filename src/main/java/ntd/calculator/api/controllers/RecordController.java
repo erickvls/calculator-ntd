@@ -3,7 +3,7 @@ package ntd.calculator.api.controllers;
 import lombok.RequiredArgsConstructor;
 import ntd.calculator.api.models.responses.RecordResponse;
 import ntd.calculator.api.models.user.User;
-import ntd.calculator.api.services.impl.RecordServiceImpl;
+import ntd.calculator.api.services.RecordService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class RecordController {
 
-    private final RecordServiceImpl recordService;
+    private final RecordService recordService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Page<RecordResponse>> records(
