@@ -29,7 +29,7 @@
 
 This project is developed for **NTD** as part of an evaluation. The goal is to implement a web platform that provides basic calculator functionalities such as addition, subtraction, multiplication, division, square root calculation, and random string generation. Each functionality is assigned a specific cost per request, which can be configured. The platform ensures that the user's balance is deducted based on the cost of each operation.
 
-- This project is composed for two modules:
+- This project is composed by two modules:
    - **The API** - This project
    - **The UI**  - You can check it [here](https://github.com/erickvls/calculator-ntd-web)
 
